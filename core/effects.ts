@@ -63,4 +63,30 @@ export class Effects{
             }
             return this.pixels;
         }
+    hexColor(hex:string)
+        {
+            var d = this.pixels,rgb;
+            rgb = this.hextorgb(hex); 
+            for (var i = 0; i < d.length; i += 4) {
+                var r = Math.max(d[i],rgb.r);
+                var g = Math.max(d[i + 1], rgb.g);
+                var b = Math.max(d[i + 2], rgb.b);
+                d[i] = r;
+                d[i + 1] = g;
+                d[i + 2] = b;
+            }
+            return this.pixels;
+        }
+          
+    hextorgb(hex:string){
+            var r,g,b,result;
+            hex = hex.replace('#','');
+            r = parseInt(hex.substring(0, 2), 16);
+            g = parseInt(hex.substring(2, 4), 16);
+            b = parseInt(hex.substring(4, 6), 16);
+            result = {'r':r,'g':g,'b':b};
+            return result;
+        }  
+            
+        
 }
