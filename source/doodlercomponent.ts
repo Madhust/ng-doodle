@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, SimpleChange} from 'angular/core';
+import {Component, Input, AfterContentInit, OnChanges, SimpleChange} from '@angular/core';
 import {Doodler} from '../core/doodler';
 
 
@@ -6,7 +6,7 @@ import {Doodler} from '../core/doodler';
     selector: "ng-doodler",
     template:"doodlercomponent.html"    
 })
-export class DoodlerComponent implements OnInit{    
+export class DoodlerComponent implements AfterContentInit, OnChanges {    
 
     width: number | string;
     height: number | string;    
@@ -36,7 +36,7 @@ export class DoodlerComponent implements OnInit{
         this._doodler = new Doodler(this.id);
     }
     
-    ngOnChange(changes: { [key: string] : SimpleChange }){
+    ngOnChanges(changes: { [key: string] : SimpleChange }){
         for(var k in changes){
             this._doodler[k] = changes[k];
         }
