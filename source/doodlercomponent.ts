@@ -1,19 +1,23 @@
-import {Component, Input, AfterContentInit, OnChanges, SimpleChange} from '@angular/core';
+import {Component, Input, AfterViewInit, OnChanges, SimpleChange} from '@angular/core';
 import {Doodler} from '../core/doodler';
 
 
 @Component({
     selector: "ng-doodler",
-    template:"doodlercomponent.html"    
+    templateUrl:"source/doodlercomponent.html"    
 })
-export class DoodlerComponent implements AfterContentInit, OnChanges {    
-
-    width: number | string;
-    height: number | string;    
-    src: string;
+export class DoodlerComponent implements AfterViewInit, OnChanges {
     
-    id: string = "doodler";
-    
+    private ele: SimpleChange; 
+        
+    @Input()
+    cWidth: number | string;
+    @Input()
+    cHeight: number | string;    
+    @Input()
+    cSrc: string;
+    @Input()
+    cId: string = "doodler";    
     @Input()
     grayScale: number;
     @Input()
@@ -27,18 +31,23 @@ export class DoodlerComponent implements AfterContentInit, OnChanges {
     @Input()
     RGB: number[] = new Array<number>(-1, -1, -1);        
     
-    public _doodler: Doodler = new Doodler(this.id);
+    public _doodler: Doodler;
      
     constructor(){                              
     }
     
-    ngAfterContentInit(){
-        this._doodler = new Doodler(this.id);
+    ngAfterViewInit(){
+        this._doodler = new Doodler(this.cId);
     }
     
     ngOnChanges(changes: { [key: string] : SimpleChange }){
-        for(var k in changes){
-            this._doodler[k] = changes[k];
+        if(this._doodler == undefined)
+         return;
+        for(var k in changes){        
+            this.ele = changes[k];
+            if(this.ele.currentValue === this.ele.previousValue)
+             continue;    
+            this._doodler[k] = this.ele.currentValue;
         }
     }
 }
