@@ -1,15 +1,15 @@
 export class Effects{
     
-    pixels: Int8Array;    
-    constructor(pixels: Int8Array){
-        this.pixels = pixels;
+    pixels: ImageData;    
+    constructor(){
+        //this.pixels = pixels;
     }
     private clampValue (value: number){
-        return value > 255 ? 255 : value;
+        return Math.max(0, Math.min(value, 255));
     }
     
-    grayScale(percent: number){
-         var d = this.pixels;  
+    grayScale(data: ImageData, percent: number): ImageData{
+         var d = data.data;  
              var gamma = (percent / 100);
             for (var i = 0; i < d.length; i+=4) {
                 var r = d[i];
@@ -18,29 +18,29 @@ export class Effects{
                 var v = 0.299 * r + 0.587 * g + 0.114 * b;                             
                 d[i] = d[i + 1] = d[i + 2] =  this.clampValue(v + (v * gamma));
             }
-            return this.pixels;
+            return data;
     }
     
-    brighten(amount: number /*amount - ranges from -1 to 1*/) {
-        var d = this.pixels; 
+    brighten(data: ImageData, amount: number /*amount - ranges from -1 to 1*/) :ImageData {
+        var d = data.data; 
         for (var i = 0; i < d.length; i += 4) {
                 d[i] = this.clampValue(d[i] * amount);
                 d[i + 1] = this.clampValue(d[i + 1] * amount);
                 d[i + 2] = this.clampValue(d[i + 2] * amount);
             }
-        return this.pixels;
+        return data;
     }
-    invert() {
-        var d = this.pixels;
+    invert(data: ImageData): ImageData {
+        var d = data.data;
         for (var i = 0; i < d.length; i += 4) {
             d[i] = 255 - d[i];
             d[i + 1] = 255 - d[i + 1];
             d[i + 2] = 255 - d[i + 2];                
         }
-        return this.pixels;
+        return data;
     }
-    sepia(percent: number) {
-            var d = this.pixels, r, g, b, rp, gp, bp, 
+    sepia(data: ImageData, percent: number) :ImageData {
+            var d = data.data, r, g, b, rp, gp, bp, 
             pt = function (p) { return p - (p * (percent | 0 / 100)); };
             
             for (var i = 0; i < d.length; i += 4) {
@@ -50,22 +50,21 @@ export class Effects{
                 rp = (r * .393) + (g * .769) + (b * .189);
                 gp = (r * .349) + (g * .686) + (b * .168);
                 bp = (r * .272) + (g * .534) + (b * .131);                
-                d[i] = pt(rp); d[i + 1] = pt(gp); d[i + 2] = pt(bp);
+                d[i] = rp; d[i + 1] = gp; d[i + 2] = bp;
             }
-            return this.pixels;
+            return data;
     }
-    contrast(contrast: number /* ranges from 0-255*/) {
-            var d = this.pixels; var f = (259 * (contrast + 255)) / (255 * (259 - contrast))
+    contrast(data: ImageData, contrast: number /* ranges from 0-255*/) :ImageData {
+            var d = data.data; var f = (259 * (contrast + 255)) / (255 * (259 - contrast))
             for (var i = 0; i < d.length; i += 4) {
                 d[i] = this.clampValue(f * (d[i] - 128) + 128);
                 d[i + 1] = this.clampValue(f * (d[i + 1] - 128) + 128);
                 d[i + 2] = this.clampValue(f * (d[i + 2] - 128) + 128);
             }
-            return this.pixels;
+            return data;
         }
-    hexColor(hex:string)
-        {
-            var d = this.pixels,rgb;
+    hexColor(data: ImageData, hex:string) : ImageData {
+            var d = data.data, rgb;
             rgb = this.hextorgb(hex); 
             for (var i = 0; i < d.length; i += 4) {
                 var r = Math.max(d[i],rgb.r);
@@ -75,7 +74,7 @@ export class Effects{
                 d[i + 1] = g;
                 d[i + 2] = b;
             }
-            return this.pixels;
+            return data;
         }
           
     hextorgb(hex:string){
