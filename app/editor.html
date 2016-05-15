@@ -13,20 +13,166 @@
         <div class="col-md-3">
             <article class="accordion">
                 <section id="acc1">
-                    <a href="#acc1">Title One</a>
-                    <p>This content appears on page 1.</p>
+                    <a href="#acc1">Open</a>
+                    <div>
+                        <table>
+                            <thead>
+                                <colgroup>
+                                <col width="50%"/>
+                                <col width="50%"/>
+                                </colgroup>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Upload Image</td>
+                                <td> 
+                                    <div class="image-upload">                                   
+                                        <label for="do-fileinput">
+                                            <span class="fa fa-upload fa-2x"></span>
+                                        </label>
+                                        <input id="do-fileinput" type="file"/>
+                                    </div>                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Selfie</td>
+                                <td> 
+                                    <div class="image-upload">                                   
+                                        <label for="do-fileselfie">
+                                            <span class="fa fa-camera fa-2x"></span>
+                                        </label>
+                                        <input id="do-fileselfie" type="file"/>
+                                    </div>                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>URL</td>
+                                <td>                                                                                                               
+                                    <input id="do-fileurl" class="do-fileurl" type="text"/>                                                                        
+                                </td>
+                            </tr>  
+                            </tbody>                                                     
+                        </table>
+                    </div>
                 </section>                
                 <section id="acc2">
-                    <a href="#acc2">Title Two</a>
-                    <p>This content appears on page 2.</p>
+                    <a href="#acc2">Effects</a>
+                    <div>
+                        <table>
+                            <thead>
+                                <colgroup>
+                                <col width="50%"/>
+                                <col width="50%"/>
+                                </colgroup>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Brightness</td>
+                                <td>                                          
+                                    <input type="range"/>                                                                       
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Contrast</td>
+                                <td>                                          
+                                    <input type="range"/>                                                                       
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Grayscale</td>
+                                <td>                                          
+                                    <input class="checkbox" type="range"/>                                                                       
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="1">Sepia</td>
+                                <td>
+                                    <input class="checkbox" type="checkbox"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Negative</td>
+                                <td>                                                                                                               
+                                    <input class="checkbox" type="checkbox"/>                                                                        
+                                </td>
+                            </tr>  
+                            </tbody>                                                     
+                        </table>
+                    </div>
                 </section>                
                 <section id="acc3">
-                    <a href="#acc3">Title Three</a>
-                    <p>This content appears on page 3.</p>
+                    <a href="#acc3">Crop</a>
+                    <div>
+                        <table>
+                            <thead>
+                                <colgroup>
+                                <col width="50%"/>
+                                <col width="50%"/>
+                                </colgroup>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Crop</td>
+                                <td>                                          
+                                    <div class="image-upload">                                   
+                                        <label for="do-filecrop">
+                                            <span class="fa fa-crop fa-2x"></span>
+                                        </label>
+                                        <input id="do-filecrop" type="button"/>
+                                    </div>                                                                       
+                                </td>
+                            </tr>  
+                            </tbody>                                                     
+                        </table>
+                    </div>
                 </section>                
                 <section id="acc4">
-                    <a href="#acc4">Title Four</a>
-                    <p>This content appears on page 4.</p>
+                    <a href="#acc4">Export</a>
+                    <div>
+                        <table>
+                            <thead>
+                                <colgroup>
+                                <col width="50%"/>
+                                <col width="50%"/>
+                                </colgroup>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Save as JPEG</td>
+                                <td>                                          
+                                    <div class="image-upload">                                   
+                                        <label for="do-fileasjpg">
+                                            <span class="fa fa-save fa-2x"></span>
+                                        </label>
+                                        <input id="do-fileasjpg" type="button"/>
+                                    </div>                                                                       
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Save as PNG</td>
+                                <td>                                          
+                                    <div class="image-upload">                                   
+                                        <label for="do-fileaspng">
+                                            <span class="fa fa-save fa-2x"></span>
+                                        </label>
+                                        <input id="do-fileaspng" type="button"/>
+                                    </div>                                                                       
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Print</td>
+                                <td>                                          
+                                    <div class="image-upload">                                   
+                                        <label for="do-fileprint">
+                                            <span class="fa fa-print fa-2x"></span>
+                                        </label>
+                                        <input id="do-fileprint" type="button"/>
+                                    </div>                                                                       
+                                </td>
+                            </tr>  
+                            </tbody>                                                     
+                        </table>
+                    </div>
                 </section>                                
             </article>
         </div>
@@ -36,8 +182,7 @@
             </div>
         </div>
     </div>
-    <div id={{doBottom}} class={{doBottom}}>   
-             
+    <div id={{doBottom}} class={{doBottom}}>             
     </div>
 </div>
     
