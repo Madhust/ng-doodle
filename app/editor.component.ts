@@ -4,7 +4,7 @@ import {DoodlerComponent} from '../source/doodlercomponent';
 @Component({
   selector: 'my-app',
   template: `
-  <ng-doodler [cId]="cid" [cWidth]="400" [cHeight]="400" [grayScale]="gray" [sepia]="sepia" [invert]="invert" [brighten]="bright" [contrast]="contrast" [doCrop]="doCrop" [resizer]="resizer"></ng-doodler>`,
+  <ng-doodler [cId]="cid" [cWidth]="400" [cHeight]="400" [imageSrc]="imageSrc" [grayScale]="gray" [sepia]="sepia" [invert]="invert" [brighten]="bright" [contrast]="contrast" [doCrop]="doCrop" [resizer]="resizer"></ng-doodler>`,
   directives:[DoodlerComponent]
 })
 export class EditorComponent {  
@@ -24,4 +24,6 @@ export class EditorComponent {
   resizer: boolean;
   @Input()
   doCrop: boolean;
+  @Input()
+  imageSrc: string;
 }

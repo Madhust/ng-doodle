@@ -8,9 +8,10 @@ margin: 0;
 }
 .do-top{
   height:20%;
-  background-color: rgb(114, 19, 142);
+  background-color: #009688;
+  /*background-color: rgb(114, 19, 142);*/
   color:#fff;
-  box-shadow: 2px 2px 2px rgb(114, 19, 120);    
+  box-shadow: 2px 2px 2px #009688;    
 }
 .do-topleft{
   font-size:50px;
@@ -25,7 +26,45 @@ margin: 0;
 }
 .do-middle{
   height:70%;
+  margin-top:5px;
 }
 .do-bottom{
   height:10%;
+}
+.editor-container{
+  margin: 50px;
+  height:100%;
+}
+/****************************** Accordion ***************************/
+article.accordion section
+{
+	height: 45px;		
+	color: #333;
+	background-color: #EEEEEE;
+	overflow: hidden;	    
+}
+article.accordion section:last-child
+{	
+  border-bottom:1px solid #eee;
+}
+article.accordion section a
+{
+	font-size: 20px;		
+	line-height: 45px;		  
+	display: block;
+	width: 100%;	
+	text-decoration: none;
+	color: inherit;
+	outline: 0 none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+article.accordion section:target
+{
+	height: auto;  
+  border-right:1px solid #eee;
+}
+article.accordion section:target p {
+	background-color: #fff;
+  height:100%;
 }

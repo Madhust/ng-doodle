@@ -9,8 +9,32 @@
         <div id={{doTopRight}} class="col-md-1 fa fa-github fa-3x {{doTopRight}}">                              
         </div>
     </div>
-    <div id={{doMiddle}} class={{doMiddle}}>
-        
+    <div id={{doMiddle}} class="row {{doMiddle}}">
+        <div class="col-md-3">
+            <article class="accordion">
+                <section id="acc1">
+                    <a href="#acc1">Title One</a>
+                    <p>This content appears on page 1.</p>
+                </section>                
+                <section id="acc2">
+                    <a href="#acc2">Title Two</a>
+                    <p>This content appears on page 2.</p>
+                </section>                
+                <section id="acc3">
+                    <a href="#acc3">Title Three</a>
+                    <p>This content appears on page 3.</p>
+                </section>                
+                <section id="acc4">
+                    <a href="#acc4">Title Four</a>
+                    <p>This content appears on page 4.</p>
+                </section>                                
+            </article>
+        </div>
+        <div class="col-md-9">
+            <div id="editor-container" class="editor-container">
+                <my-app [cid]="cid" [cWidth]="400" [cHeight]="400" [imageSrc]="imageSrc"></my-app>
+            </div>
+        </div>
     </div>
     <div id={{doBottom}} class={{doBottom}}>   
              

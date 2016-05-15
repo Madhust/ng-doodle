@@ -17,7 +17,11 @@ class MainComponent {
     doBottom = "do-bottom";
     doTopLeft = "do-topleft";
     doTopCenter = "do-topcenter";
-    doTopRight = "do-topright";     
+    doTopRight = "do-topright"; 
+    doMiddleLeft: "do-middleleft";    
+    doMiddleRight: "do-middleright";
+    cid: string = "doodler";       
+    imageSrc = "content/images/md-normal.jpg";    
     constructor() {
     }
 }
