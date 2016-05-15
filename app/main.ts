@@ -66,7 +66,7 @@ class MainComponent implements AfterViewInit{
             var ctx = <CanvasRenderingContext2D>cv.getContext("2d");
             ctx.drawImage(<HTMLVideoElement>document.getElementById("videoElement"),0,0, cv.width, cv.height);
             this.imageSrc = cv.toDataURL();
-            window["stream"]["stop"]();
+            window["stream"]["getTracks"]()[0]["stop"]();
             document.getElementById("videocontainer").style.display = "none";
         };
     }
