@@ -1,10 +1,22 @@
 # ngDoodle
 
-ngDoodle is an image scribble pad powered by angular and typescript. We angularizing our app to achieve this, 
-<table>
-<tr>
-<td style="padding:10px"><img src="content/images/md-bw.jpg" style="width:200px;height:300px"/><p style="text-align:center">1996</p></td>
-<td style="padding:10px"><img src="content/images/md-normal.jpg" style="width:200px;height:300px"/><p style="text-align:center">2016</p></td>
-<td style="padding:10px"><img src="content/images/md-vintage.jpg" style="width:200px;height:300px"/><p style="text-align:center">2020</p></td>
-</tr>
-</table>
+ngDoodle is an image editor app, powered by Angular and Typescript, to apply a set of image effects and flip.
+
+List of features are as follows:
+
+1. Image upload by one of the following ways
+      a. local machine
+      b. Selfie with device camera ;)
+      c. Remote image url
+2. special effects to your image such as
+      a. Brightness
+      b. Contrast
+      c. Grayscale
+      d. Sepia 
+      e. Negative
+3. flip horizontal or vertical.
+4. Export in one of the belowways.
+      a. jpg 
+      b. png
+      c. Print.
+
