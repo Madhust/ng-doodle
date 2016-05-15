@@ -7,6 +7,7 @@ export class Doodler{
     originalContext: CanvasRenderingContext2D;
     hostEle: HTMLCanvasElement;
     hostContext: CanvasRenderingContext2D;
+    imageEle: HTMLImageElement;
     effects: Effects;
     cropper: Cropper;
     
@@ -16,12 +17,15 @@ export class Doodler{
     private _brighten: number = 0;
     private _sepia: number = 0;
     private _contrast: number = 0;
+    private _imageSrc: string = "";
     
-    constructor(id: string){        
+    constructor(id: string, src?: string){        
         this.initializeElement(id);
-        this.createHostElement();    
-        this.gatherOriginalData();
-        this.hostContext.drawImage(this.originalEle, 0, 0);
+        this._imageSrc = src;
+        this.createHostElement();           
+        this.gatherOriginalData();  
+        this.createHostImage();       
+        this.hostContext.drawImage(this.imageEle, 0, 0);
         this.effects = new Effects();
         this.cropper = new Cropper();
     }
@@ -34,7 +38,7 @@ export class Doodler{
     
     set grayScale(percent: number){
         this._grayScale = percent;  
-        this.applyOriginal()     
+        this.applyOriginal();     
         this.putImageData(this.effects.grayScale(this.getImageData(), percent));
     }
     
@@ -79,6 +83,14 @@ export class Doodler{
         this.putImageData(this.effects.contrast(this.getImageData(), percent));
     }
     
+    get imageSrc(){
+      return this._imageSrc;    
+    }
+    set imageSrc(value: string){
+        this._imageSrc = value;
+        this.createHostImage();
+    }
+    
     //Methods
     
     initializeElement(id: string){
@@ -92,19 +104,31 @@ export class Doodler{
         this.originalEle.parentElement.appendChild(this.hostEle);
         this.originalEle.style.display = "none";           
     }
+    createHostImage(){
+        var img = document.getElementById(this.originalEle.id + "_hostimage");
+        if(img != null || img != undefined)
+           img.parentElement.removeChild(img);
+        this.imageEle = new Image(this.originalEle.width, this.originalEle.height);
+        this.imageEle.onload= ()=> {
+        this.imageEle.id = this.originalEle.id + "_hostimage"; 
+        this.applyOriginal(true);     
+        }
+        this.imageEle.src = this.imageSrc;         
+    }
     gatherOriginalData(){
         this.originalContext = this.originalEle.getContext("2d");
         this.hostContext = this.hostEle.getContext("2d");
     }    
     getImageData(): ImageData{
         return this.hostContext.getImageData(0, 0, this.originalEle.width, this.originalEle.height);
-    }
-    
-    applyOriginal(){
-        this.hostContext.putImageData(this.originalContext.getImageData(0, 0, this.originalEle.width, this.originalEle.height), 0, 0);
+    }    
+    applyOriginal(first?: boolean){        
+           this.hostContext.drawImage(this.imageEle, 0, 0, this.originalEle.width, this.originalEle.height);        
+        if(first) 
+           this.originalContext.drawImage(this.imageEle, 0, 0, this.hostEle.width, this.hostEle.height);              
     }
     
     putImageData(data: ImageData){
-        this.hostContext.putImageData(data, 0, 0);
+       setTimeout(()=>{this.hostContext.putImageData(data, 0, 0); }, 0); 
     }         
 }

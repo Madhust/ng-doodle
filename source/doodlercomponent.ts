@@ -30,6 +30,8 @@ export class DoodlerComponent implements AfterViewInit, OnChanges {
     contrast: number;
     @Input()
     RGB: number[] = new Array<number>(-1, -1, -1);        
+    @Input()
+    imageSrc: string;
     
     public _doodler: Doodler;
      
@@ -37,7 +39,7 @@ export class DoodlerComponent implements AfterViewInit, OnChanges {
     }
     
     ngAfterViewInit(){
-        this._doodler = new Doodler(this.cId);
+        this._doodler = new Doodler(this.cId, this.imageSrc);
     }
     
     ngOnChanges(changes: { [key: string] : SimpleChange }){
