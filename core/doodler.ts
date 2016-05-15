@@ -18,6 +18,8 @@ export class Doodler{
     private _sepia: number = 0;
     private _contrast: number = 0;
     private _imageSrc: string = "";
+    private _enableCrop: boolean = false;
+    private _cropDone: boolean = false;
     
     constructor(id: string, src?: string){        
         this.initializeElement(id);
@@ -40,6 +42,24 @@ export class Doodler{
         this._grayScale = percent;  
         this.applyOriginal();     
         this.putImageData(this.effects.grayScale(this.getImageData(), percent));
+    }
+    
+    get enableCropper(){
+        return this._enableCrop;
+    }
+    
+    set enableCropper(bl: boolean){
+        this._enableCrop = bl;
+        this.cropper.cropImg();
+    }
+    
+    get cropDone(){
+        return this._cropDone;
+    }
+    
+    set cropDone(bl: boolean){
+        this._cropDone = bl;
+        this.cropper.cropDoneImg();
     }
     
     get brighten(){

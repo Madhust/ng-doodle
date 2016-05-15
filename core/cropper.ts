@@ -4,7 +4,7 @@ export class Cropper{
   target: HTMLElement;
   centerX: boolean;
   centerY: boolean;
-  cropDoneImg(e){
+  cropDoneImg(){
              var c = <HTMLCanvasElement>document.getElementById("mycanvas");
              var container = document.getElementById("canvasContainer");
               var ctx = c.getContext("2d");
