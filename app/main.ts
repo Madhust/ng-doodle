@@ -6,15 +6,19 @@ import { EditorComponent } from './editor.component';
  * MainComponent
  */
 @Component({
-    selector:"m-app",
-    template:'<my-app cid="{{i}}" gray={{gray}}></my-app>',
+    selector:"my-editor",
+    templateUrl:"app/editor.html",
     directives:[EditorComponent]
 })
-class MainComponent {
-    i: string = "doodler";
-    gray: number = -1;    
+class MainComponent {    
+    doEditor = "do-editor";
+    doTop = "do-top";
+    doMiddle = "do-middle";
+    doBottom = "do-bottom";
+    doTopLeft = "do-topleft";
+    doTopCenter = "do-topcenter";
+    doTopRight = "do-topright";     
     constructor() {
-               
     }
 }
 

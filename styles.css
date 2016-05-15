@@ -1,0 +1,31 @@
+body{
+margin: 0;
+}
+.do-editor{
+  margin:0px;
+  padding: 0px;
+  overflow: hidden;
+}
+.do-top{
+  height:20%;
+  background-color: rgb(114, 19, 142);
+  color:#fff;
+  box-shadow: 2px 2px 2px rgb(114, 19, 120);    
+}
+.do-topleft{
+  font-size:50px;
+}
+.do-topright{
+  padding-top: 15px;
+  padding-left: 40px;
+  opacity: 0.9;
+}
+.do-topright:hover{  
+  opacity: 1;
+}
+.do-middle{
+  height:70%;
+}
+.do-bottom{
+  height:10%;
+}
