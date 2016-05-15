@@ -69,31 +69,31 @@
                             <tr>
                                 <td>Brightness</td>
                                 <td>                                          
-                                    <input type="range"/>                                                                       
+                                    <input type="range" min="0" max="5" step="1" [(ngModel)]="brightness"/>                                                                       
                                 </td>
                             </tr>
                             <tr>
                                 <td>Contrast</td>
                                 <td>                                          
-                                    <input type="range"/>                                                                       
+                                    <input type="range" min="0" max="50" step="5" [(ngModel)]="contrast"/>                                                                       
                                 </td>
                             </tr>
                             <tr>
                                 <td>Grayscale</td>
                                 <td>                                          
-                                    <input class="checkbox" type="range"/>                                                                       
+                                    <input type="range" min="-100" max="100" step="10" [(ngModel)]="grayScale"/>                                     
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="1">Sepia</td>
                                 <td>
-                                    <input class="checkbox" type="checkbox"/>
+                                    <input class="checkbox" type="checkbox" (change)="sepiaIt()"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Negative</td>
                                 <td>                                                                                                               
-                                    <input class="checkbox" type="checkbox"/>                                                                        
+                                    <input class="checkbox" type="checkbox" (change)="invertIt()"/>                                                                        
                                 </td>
                             </tr>  
                             </tbody>                                                     
@@ -178,7 +178,7 @@
         </div>
         <div class="col-md-9">
             <div id="editor-container" class="editor-container">
-                <my-app [cid]="cid" [enableCropper]="enableCropper" [cropDone]="cropDone" [width]="400" [height]="400" [imageSrc]="imageSrc"></my-app>
+                <my-app [cid]="cid" [enableCropper]="enableCropper" [cropDone]="cropDone" [width]="400" [height]="400" [imageSrc]="imageSrc" [grayScale]="grayScale" [brightness]="brightness" [contrast]="contrast" [invert]="invert" [sepia]="sepia"></my-app>
             </div>
         </div>
     </div>

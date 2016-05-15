@@ -28,11 +28,11 @@ export class DoodlerComponent implements AfterViewInit, OnChanges {
     @Input()
     grayScale: number;
     @Input()
-    brighten: number;
+    brightness: number;
     @Input()
     invert: boolean;
     @Input()
-    sepia: number;
+    sepia: boolean;
     @Input()
     contrast: number;
     @Input()

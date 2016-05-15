@@ -15,7 +15,7 @@ export class Doodler{
     private _grayScale: number = 0;
     private _invert:boolean = false;
     private _brighten: number = 0;
-    private _sepia: number = 0;
+    private _sepia: boolean = false;
     private _contrast: number = 0;
     private _imageSrc: string = "";
     private _enableCrop: boolean = false;
@@ -62,11 +62,11 @@ export class Doodler{
         this.cropper.cropDoneImg();
     }
     
-    get brighten(){
+    get brightness(){
         return this._brighten;
     }
     
-    set brighten(percent: number){
+    set brightness(percent: number){
         this._brighten = percent;
         this.applyOriginal();     
         this.putImageData(this.effects.brighten(this.getImageData(), percent));        
@@ -87,10 +87,11 @@ export class Doodler{
         return this._sepia;
     }
     
-    set sepia(percent: number){
+    set sepia(percent: boolean){
         this._sepia = percent;        
-        this.applyOriginal();     
-        this.putImageData(this.effects.sepia(this.getImageData(), percent));
+        this.applyOriginal();  
+        if(percent)   
+            this.putImageData(this.effects.sepia(this.getImageData(), 100));
     }
     
      get contrast(){

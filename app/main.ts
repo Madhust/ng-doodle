@@ -22,9 +22,20 @@ class MainComponent {
     doMiddleRight: "do-middleright";
     cid: string = "doodler";       
     cropDone = false;
-    enableCropper = false;    
+    enableCropper = false;  
+    grayScale: number = 0;
+    brightness: number = 0;
+    contrast: number = 1;
+    invert: boolean = false;
+    sepia: boolean = false;  
     imageSrc = "content/images/test.png";    
     constructor() {
+    }
+    invertIt(){
+        this.invert = !this.invert;
+    }
+    sepiaIt(){
+        this.sepia = !this.sepia;
     }
 }
 
