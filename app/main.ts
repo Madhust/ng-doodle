@@ -1,5 +1,5 @@
 import { bootstrap }    from '@angular/platform-browser-dynamic';
-import { Component } from '@angular/core';
+import { Component,AfterViewInit } from '@angular/core';
 import { EditorComponent } from './editor.component';
 
 /**
@@ -10,7 +10,7 @@ import { EditorComponent } from './editor.component';
     templateUrl:"app/editor.html",
     directives:[EditorComponent]
 })
-class MainComponent {    
+class MainComponent implements AfterViewInit{    
     doEditor = "do-editor";
     doTop = "do-top";
     doMiddle = "do-middle";
@@ -36,6 +36,21 @@ class MainComponent {
     }
     sepiaIt(){
         this.sepia = !this.sepia;
+    }
+    
+    ngAfterViewInit(){
+        document.getElementById("do-fileinput").onchange = (e) => {
+            var f = (<HTMLInputElement>e.target).files[0];
+            var reader = new FileReader();
+            reader.addEventListener("load", (e) => {
+                this.imageSrc =  reader.result;
+            }, false);
+            reader.readAsDataURL(f);
+    
+            }         
+        document.getElementById("do-fileselfie").onchange = (e) => {
+            
+        }
     }
 }
 
