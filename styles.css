@@ -31,8 +31,9 @@ margin: 0;
   margin-top:5px;
 }
 .do-bottom{
-  height:10%;
-  /*background-color: #B2DFDB;  */
+  height:10%;  
+  color:#009688;
+ text-align: center;  
 }
 .editor-container{
   margin: 50px 50px 50px 60px;
