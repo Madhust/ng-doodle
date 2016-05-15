@@ -99,6 +99,33 @@
                             </tbody>                                                     
                         </table>
                     </div>
+                </section>
+                <section id="flipper">
+                    <a href="#flipper">Flipper</a>
+                    <div>
+                        <table>
+                            <thead>
+                                <colgroup>
+                                <col width="50%"/>
+                                <col width="50%"/>
+                                </colgroup>
+                            </thead>
+                            <tbody>                            
+                            <tr>
+                                <td colspan="1">Flip Horizontal</td>
+                                <td>
+                                    <input class="checkbox" type="checkbox" (change)="hIt()"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Flip Vertical</td>
+                                <td>                                                                                                               
+                                    <input class="checkbox" type="checkbox" (change)="vIt()"/>                                                                        
+                                </td>
+                            </tr>  
+                            </tbody>                                                     
+                        </table>
+                    </div>
                 </section>                                                
                 <section id="export">
                     <a href="#export">Export</a>
@@ -152,7 +179,7 @@
         </div>
         <div class="col-md-9">
             <div id="editor-container" class="editor-container">
-                <my-app [cid]="cid" [enableCropper]="enableCropper" [cropDone]="cropDone" [width]="400" [height]="400" [imageSrc]="imageSrc" [grayScale]="grayScale" [brightness]="brightness" [contrast]="contrast" [invert]="invert" [sepia]="sepia"></my-app>
+                <my-app [cid]="cid" [enableCropper]="enableCropper" [cropDone]="cropDone" [width]="400" [height]="400" [imageSrc]="imageSrc" [grayScale]="grayScale" [brightness]="brightness" [contrast]="contrast" [invert]="invert" [sepia]="sepia" [horizontalFlip]="horizontalFlip" [verticalFlip]="verticalFlip"></my-app>
             </div>
         </div>
     </div>

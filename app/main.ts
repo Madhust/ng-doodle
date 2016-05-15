@@ -28,7 +28,9 @@ class MainComponent implements AfterViewInit{
     contrast: number = 1;
     invert: boolean = false;
     sepia: boolean = false;  
-    imageSrc = "content/images/test.png";    
+    imageSrc = "content/images/test.png";
+    verticalFlip: boolean;
+    horizontalFlip: boolean;
     constructor() {
     }
     invertIt(){
@@ -36,6 +38,13 @@ class MainComponent implements AfterViewInit{
     }
     sepiaIt(){
         this.sepia = !this.sepia;
+    }
+    
+    vIt(){
+        this.verticalFlip = !this.verticalFlip;
+    }
+     hIt(){
+        this.horizontalFlip = !this.horizontalFlip;
     }
     saveAsJPG(){
         let editedImg = <HTMLCanvasElement>document.getElementById("doodler_host"),

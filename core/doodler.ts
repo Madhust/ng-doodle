@@ -1,5 +1,6 @@
 import {Effects} from './effects';
-import {Cropper} from './cropper'
+import {Cropper} from './cropper';
+import {Flipper} from './flipper';
 
 export class Doodler{
     
@@ -10,7 +11,7 @@ export class Doodler{
     imageEle: HTMLImageElement;
     effects: Effects;
     cropper: Cropper;
-    
+    flipper :Flipper; 
     //Private fields
     private _grayScale: number = 0;
     private _invert:boolean = false;
@@ -20,6 +21,9 @@ export class Doodler{
     private _imageSrc: string = "";
     private _enableCrop: boolean = false;
     private _cropDone: boolean = false;
+    private _hFlip: boolean = false;
+    private _vFlip: boolean = false;
+    
     
     constructor(id: string, src?: string){        
         this.initializeElement(id);
@@ -30,6 +34,7 @@ export class Doodler{
         this.hostContext.drawImage(this.imageEle, 0, 0);
         this.effects = new Effects();
         this.cropper = new Cropper(this.imageEle);
+        this.flipper = new Flipper(this.originalEle, this.imageEle, this.hostEle);
     }
     
     //Property initialization
@@ -110,6 +115,23 @@ export class Doodler{
     set imageSrc(value: string){
         this._imageSrc = value;
         this.createHostImage();
+    }
+    
+    get horizontalFlip(){
+        return this._hFlip;
+    }
+    
+    set horizontalFlip(value: boolean){
+        this._hFlip = value;
+        this.flipper.horizontalFlip();
+    }
+    get verticalFlip(){
+        return this._vFlip;
+    }
+    
+    set verticalFlip(value: boolean){
+        this._vFlip = value;
+        this.flipper.verticalFlip();
     }
     
     //Methods

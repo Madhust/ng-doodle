@@ -43,6 +43,10 @@ export class DoodlerComponent implements AfterViewInit, OnChanges {
     enableCropper: boolean;
     @Input()
     cropDone: boolean;
+    @Input()
+    verticalFlip: boolean;
+    @Input()
+    horizontalFlip: boolean;
     
     public _doodler: Doodler;
      
