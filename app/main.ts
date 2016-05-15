@@ -37,7 +37,28 @@ class MainComponent implements AfterViewInit{
     sepiaIt(){
         this.sepia = !this.sepia;
     }
-    
+    saveAsJPG(){
+        let editedImg = <HTMLCanvasElement>document.getElementById("doodler_host"),
+            a = document.getElementById("do-fileasjpg");
+        a.setAttribute("href", editedImg.toDataURL());
+        a.click();
+    }
+    saveAsPNG(){
+        let editedImg = <HTMLCanvasElement>document.getElementById("doodler_host"),
+            a = document.getElementById("do-fileaspng");
+        a.setAttribute("href", editedImg.toDataURL());
+        a.click();
+    }
+    print(){        
+       let editedImg = document.getElementById("doodler_host"),
+           canvas = document.createElement("canvas"),
+           context = canvas.getContext("2d"),
+           win = window.open('','','width=1000,height=600');
+       context.drawImage(<HTMLCanvasElement>editedImg, 0, 0);                     
+       win.document.body.appendChild(canvas);
+       win.print();
+       win.close();       
+    }
     ngAfterViewInit(){
         document.getElementById("do-fileinput").onchange = (e) => {
             var f = (<HTMLInputElement>e.target).files[0];

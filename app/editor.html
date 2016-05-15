@@ -12,8 +12,8 @@
     <div id={{doMiddle}} class="row {{doMiddle}}">
         <div class="col-md-3">
             <article class="accordion">
-                <section id="acc1">
-                    <a href="#acc1">Open</a>
+                <section id="open">
+                    <a href="#open">Open</a>
                     <div>
                         <table>
                             <thead>
@@ -55,8 +55,8 @@
                         </table>
                     </div>
                 </section>                
-                <section id="acc2">
-                    <a href="#acc2">Effects</a>
+                <section id="effects">
+                    <a href="#effects">Effects</a>
                     <div>
                         <table>
                             <thead>
@@ -99,35 +99,9 @@
                             </tbody>                                                     
                         </table>
                     </div>
-                </section>                
-                <section id="acc3">
-                    <a href="#acc3">Crop</a>
-                    <div>
-                        <table>
-                            <thead>
-                                <colgroup>
-                                <col width="50%"/>
-                                <col width="50%"/>
-                                </colgroup>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Crop</td>
-                                <td>                                          
-                                    <div class="image-upload">                                   
-                                        <label for="do-filecrop">
-                                            <span class="fa fa-crop fa-2x"></span>
-                                        </label>
-                                        <input id="do-filecrop" type="button"/>
-                                    </div>                                                                       
-                                </td>
-                            </tr>  
-                            </tbody>                                                     
-                        </table>
-                    </div>
-                </section>                
-                <section id="acc4">
-                    <a href="#acc4">Export</a>
+                </section>                                                
+                <section id="export">
+                    <a href="#export">Export</a>
                     <div>
                         <table>
                             <thead>
@@ -141,10 +115,10 @@
                                 <td>Save as JPEG</td>
                                 <td>                                          
                                     <div class="image-upload">                                   
-                                        <label for="do-fileasjpg">
-                                            <span class="fa fa-save fa-2x"></span>
+                                        <label for="do-fileasjpg" (click) = "saveAsJPG()">
+                                            <span class="fa fa-save fa-2x"></span>                                           
                                         </label>
-                                        <input id="do-fileasjpg" type="button"/>
+                                        <a id="do-fileasjpg" download="image.jpeg"></a>                                        
                                     </div>                                                                       
                                 </td>
                             </tr>
@@ -152,10 +126,10 @@
                                 <td>Save as PNG</td>
                                 <td>                                          
                                     <div class="image-upload">                                   
-                                        <label for="do-fileaspng">
+                                        <label for="do-fileaspng" (click) = "saveAsPNG()">
                                             <span class="fa fa-save fa-2x"></span>
                                         </label>
-                                        <input id="do-fileaspng" type="button"/>
+                                        <a id="do-fileaspng" download="image.png"></a>
                                     </div>                                                                       
                                 </td>
                             </tr>
@@ -163,14 +137,14 @@
                                 <td>Print</td>
                                 <td>                                          
                                     <div class="image-upload">                                   
-                                        <label for="do-fileprint">
+                                        <label for="do-fileprint" (click)="print()">
                                             <span class="fa fa-print fa-2x"></span>
                                         </label>
                                         <input id="do-fileprint" type="button"/>
                                     </div>                                                                       
                                 </td>
                             </tr>  
-                            </tbody>                                                     
+                            </tbody>                                                    
                         </table>
                     </div>
                 </section>                                
