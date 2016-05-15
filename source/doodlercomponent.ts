@@ -1,14 +1,21 @@
 import {Component, Input, AfterViewInit, OnChanges, SimpleChange} from '@angular/core';
+import {NgStyle} from '@angular/common';
 import {Doodler} from '../core/doodler';
 
 
 @Component({
     selector: "ng-doodler",
-    templateUrl:"source/doodlercomponent.html"    
+    templateUrl:"source/doodlercomponent.html",
+    directives:[NgStyle]    
 })
 export class DoodlerComponent implements AfterViewInit, OnChanges {
     
     private ele: SimpleChange; 
+        
+    containerStyles: any = {       
+            'width': this.cWidth + "px",
+            'height': this.cHeight + "px"
+        };
         
     @Input()
     cWidth: number | string;
@@ -32,6 +39,10 @@ export class DoodlerComponent implements AfterViewInit, OnChanges {
     RGB: number[] = new Array<number>(-1, -1, -1);        
     @Input()
     imageSrc: string;
+    @Input()
+    enableCropper: boolean;
+    @Input()
+    cropDone: boolean;
     
     public _doodler: Doodler;
      
@@ -51,5 +62,5 @@ export class DoodlerComponent implements AfterViewInit, OnChanges {
              continue;    
             this._doodler[k] = this.ele.currentValue;
         }
-    }
+    }        
 }

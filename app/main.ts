@@ -21,6 +21,8 @@ class MainComponent {
     doMiddleLeft: "do-middleleft";    
     doMiddleRight: "do-middleright";
     cid: string = "doodler";       
+    cropDone = false;
+    enableCropper = false;    
     imageSrc = "content/images/test.png";    
     constructor() {
     }

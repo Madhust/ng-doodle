@@ -29,7 +29,7 @@ export class Doodler{
         this.createHostImage();       
         this.hostContext.drawImage(this.imageEle, 0, 0);
         this.effects = new Effects();
-        this.cropper = new Cropper();
+        this.cropper = new Cropper(this.imageEle);
     }
     
     //Property initialization

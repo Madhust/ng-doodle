@@ -4,7 +4,9 @@ import {DoodlerComponent} from '../source/doodlercomponent';
 @Component({
   selector: 'my-app',
   template: `
-  <ng-doodler [cId]="cid" [cWidth]="800" [cHeight]="400" [imageSrc]="imageSrc" [grayScale]="gray" [sepia]="sepia" [invert]="invert" [brighten]="bright" [contrast]="contrast" [doCrop]="doCrop" [resizer]="resizer"></ng-doodler>`,
+  Enable Cropper: <input type="checkbox" [(ngModel)] = "enableCropper"/>
+  Crop: <input type="checkbox" [(ngModel)] = "cropDone"/>
+  <ng-doodler [cId]="cid" [cWidth]="400" [cHeight]="400" [cropDone]="cropDone" [enableCropper]="enableCropper" [imageSrc]="imageSrc"></ng-doodler>`,
   directives:[DoodlerComponent]
 })
 export class EditorComponent {  
@@ -21,9 +23,9 @@ export class EditorComponent {
   @Input()
   sepia: number;
   @Input()
-  resizer: boolean;
+  enableCropper: boolean;
   @Input()
-  doCrop: boolean;
+  cropDone: boolean;
   @Input()
   imageSrc: string;
 }

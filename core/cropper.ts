@@ -4,19 +4,23 @@ export class Cropper{
   target: HTMLElement;
   centerX: boolean;
   centerY: boolean;
+  orgImg: HTMLImageElement;
+  constructor(orginalImg: HTMLImageElement){
+    this.orgImg = orginalImg;
+  }
   cropDoneImg(){
-             var c = <HTMLCanvasElement>document.getElementById("mycanvas");
+             var c = <HTMLCanvasElement>document.getElementById("doodler_host");
              var container = document.getElementById("canvasContainer");
               var ctx = c.getContext("2d");
-              var img = <HTMLImageElement>document.getElementById("im");
-              var cVisual= document.getElementById("cropVisual");
-               ctx.clearRect(0,0,c.offsetWidth,c.offsetHeight);
-              ctx.drawImage(img, cVisual.offsetLeft, cVisual.offsetTop, cVisual.offsetWidth, cVisual.offsetHeight ,0,0, container.offsetWidth, container.offsetHeight);
+              var cVisual= <HTMLCanvasElement>document.getElementById("cropVisual");
+               ctx.clearRect(0,0,c.width,c.height);
+              ctx.drawImage(this.orgImg, cVisual.offsetLeft, cVisual["offsetTop"], cVisual.offsetWidth, cVisual.offsetHeight ,0,0, container.offsetWidth, container.offsetHeight);
+              cVisual.style.display ="none"
               
           }
     loadImg(event) {
             
-             var c= <HTMLCanvasElement>document.getElementById("mycanvas");
+             var c= <HTMLCanvasElement>document.getElementById("doodler");
               var ctx = c.getContext("2d");
               var img = <HTMLImageElement>document.getElementById("im");
               ctx.drawImage(img, 0, 0 ,850, 700);
@@ -28,22 +32,60 @@ export class Cropper{
           
     cropImg(){
     var cSpan = document.getElementsByClassName("cropSpan");
-          var cVisual= document.getElementById("cropVisual");
-          for(var idx in cSpan){
-            var ele = <HTMLElement> cSpan[idx];
+                    var cVisual = document.getElementById("cropVisual");
+                    var cnvs = <HTMLCanvasElement>cVisual.previousElementSibling;
+                    var container = cVisual.parentElement;
+                    var padLeft = cnvs.width * .1, padHeight =cnvs.height * .1;
+                    container.style.width = cnvs.width.toString() + "px"; container.style.height = cnvs.height.toString() + "px";
+                    container.style.top = padHeight.toString(); container.style.left = padLeft.toString()
+                    
+      cVisual.style.display = "block";
+          for(var i= 0; i <  cSpan.length; i++){
+            var ele = <HTMLElement>cSpan[i];
               ele.onmousedown = this.cropResizeDown;
           }
-          cVisual.onmousedown = this.cropDown;
-      cVisual.style.display = "block";
-  }
-  cropDown(e){
-            if(e.target.id != "cropVisual")
+          cVisual.onmousedown = (e)=>{
+            if((<HTMLElement>e.target).id != "cropVisual")
              return true;
              this.startX= e.pageX; this.startY= e.pageY;
-              document.onmousemove = this.cropMove;              
-              document.onmouseup = this.cropUp;
+              document.onmousemove = (e)=>{
+              var cVisual = document.getElementById("cropVisual");
+              var cnvs = <HTMLCanvasElement>document.getElementById("doodler");
+              var orgPos = cnvs.getBoundingClientRect();
+              var pageX = e.pageX; var pageY = e.pageY;
+              if (e.pageX > cnvs.width + cnvs.offsetLeft) {
+                  cVisual.style.left = (cnvs.offsetLeft + cnvs.width - cVisual.offsetWidth).toString();
+                  return true;
+              }
+              if (e.pageX < orgPos.left - 1) {
+                  cVisual.style.left = "0";
+                  return true;
+              }
+              if (e.pageY < orgPos.top) {
+                  cVisual.style.top = "0";
+                  return true;
+              }
+              if (e.pageY > cnvs.height + cnvs["offsetTop"]) {
+                  cVisual.style.top = (cnvs["offsetTop"] + cnvs.height - cVisual.offsetHeight).toString();
+                  return true;
+              }
+              var xPos = this.startX > pageX ? cVisual.offsetLeft - (this.startX - pageX) : cVisual.offsetLeft - (this.startX - pageX);
+              var yPos = this.startY > pageY ? cVisual["offsetTop"] - (this.startY - pageY) : cVisual["offsetTop"] - (this.startY - pageY);
+
+              this.startX = pageX; this.startY = pageY;
+              if (cnvs.offsetLeft <= xPos && cnvs.offsetLeft + cnvs.width >= xPos + cVisual.offsetWidth)
+                  cVisual.style.left = xPos.toString()+"px";
+              if (cnvs["offsetTop"] <= yPos && cnvs["offsetTop"] + cnvs.height >= yPos + cVisual.offsetHeight)
+                  cVisual.style.top = yPos.toString()+"px";  
+              };              
+              document.onmouseup  = (e)=>{              
+              document.onmouseup = null;
+              document.onmousemove = null;
+          }
               
           }
+  }
+  
           cropResizeDown(e: any){
               if(document.body.style.cursor == "not-allowed")
                return true;
@@ -57,12 +99,9 @@ export class Cropper{
                   this.centerY = true;
               document.body.style.cursor = e.target.classList.contains("cropSpanTC") ? "n-resize" : "s-resize"
               }
-             this.bindSpanEvent({move:this.cropResizeMove, up: this.cropResizeUp});
-          }
-          cropResizeMove(e) {
-
+               document.onmousemove = (e)=>{
               var vsElement = <HTMLElement>document.getElementById("cropVisual");
-              var cnvsElement = <HTMLElement>document.getElementById("mycanvas");
+              var cnvsElement = <HTMLCanvasElement>document.getElementById("doodler");
               var crosPos = this;
               if (vsElement.offsetLeft + vsElement.offsetWidth == e.pageX)
                   return true;
@@ -76,73 +115,42 @@ export class Cropper{
               if (!crosPos.centerY) {
                   var width;
                   if (crosPos.target.classList.contains("cropSpanRC")) {
-                      width = vsElement.offsetWidth - (x1 - x2 + 2);;
-                      if (x2 < x1 || (cnvsElement.offsetLeft + cnvsElement.offsetWidth) > (vsElement.offsetLeft + width))
-                          vsElement.style.width = width
+                      width = vsElement.offsetWidth - (x1 - x2);;
+                      if (x2 < x1 || (cnvsElement.offsetLeft + cnvsElement.width) > (vsElement.offsetLeft + width))
+                          vsElement.style.width = width+"px";
                   }
                   else if (!crosPos.target.classList.contains("cropSpanRC")) {
                       var left = vsElement.offsetLeft + (x2 - x1);
-                      width = vsElement.offsetWidth + (x1 - x2) - 2;
+                      width = vsElement.offsetWidth + (x1 - x2) ;
                       if (left >= -1 && left <= left + width ) {
-                          vsElement.style.left = left.toString();
-                          vsElement.style.width = width;
+                          vsElement.style.left = left.toString()+"px";
+                          vsElement.style.width = width+"px";
                       }
                   }
               }
               if (!crosPos.centerX) {
                   var height;
                   if (crosPos.target.classList.contains("cropSpanTC")) {
-                      var top = vsElement.offsetTop + (y2 - y1);
-                      height = vsElement.offsetHeight - (y2 - y1) - 2;
+                      var top = vsElement["offsetTop"] + (y2 - y1);
+                      height = vsElement.offsetHeight - (y2 - y1) ;
                       if (top >= -1 && top <= top + height) {
-                          vsElement.style.top = top.toString();
-                          vsElement.style.height = height
+                          vsElement.style.top = top.toString()+"px";
+                          vsElement.style.height = height+"px";
                       }
                   }
                   else if (!crosPos.target.classList.contains("cropSpanTC")) {
-                      height = vsElement.offsetHeight - (y1 - y2 + 2)
-                      if (y2 < y1 || (cnvsElement.offsetTop + cnvsElement.offsetHeight) > (vsElement.offsetTop + height))
-                          vsElement.style.height = (vsElement.offsetHeight - (y1 - y2 + 2)).toString();
+                      height = vsElement.offsetHeight - (y1 - y2)
+                      if (y2 < y1 || (cnvsElement["offsetTop"] + cnvsElement.height) > (vsElement["offsetTop"] + height))
+                          vsElement.style.height = (vsElement.offsetHeight - (y1 - y2)).toString()+"px";
                   }
               }
           }
-          cropResizeUp(){
-              document.body.style.cursor = "";
-              this.bindSpanEvent(null);
+              document.onmouseup= (e)=>{
+                document.body.style.cursor = "";
+                document.onmousemove = null;
+                document.onmouseup = null;
+              }
           }
-           cropMove(e) {
-              var cVisual = document.getElementById("cropVisual");
-              var cnvs = document.getElementById("mycanvas");
-              var orgPos = cnvs.getBoundingClientRect();
-              var pageX = e.pageX; var pageY = e.pageY;
-              if (e.pageX > cnvs.offsetWidth + cnvs.offsetLeft) {
-                  cVisual.style.left = (cnvs.offsetLeft + cnvs.offsetWidth - cVisual.offsetWidth).toString();
-                  return true;
-              }
-              if (e.pageX < orgPos.left - 1) {
-                  cVisual.style.left = "0";
-                  return true;
-              }
-              if (e.pageY < orgPos.top) {
-                  cVisual.style.top = "0";
-                  return true;
-              }
-              if (e.pageY > cnvs.offsetHeight + cnvs.offsetTop) {
-                  cVisual.style.top = (cnvs.offsetTop + cnvs.offsetHeight - cVisual.offsetHeight).toString();
-                  return true;
-              }
-              var xPos = this.startX > pageX ? cVisual.offsetLeft - (this.startX - pageX) : cVisual.offsetLeft - (this.startX - pageX);
-              var yPos = this.startY > pageY ? cVisual.offsetTop - (this.startY - pageY) : cVisual.offsetTop - (this.startY - pageY);
-
-              this.startX = pageX; this.startY = pageY;
-              if (cnvs.offsetLeft <= xPos && cnvs.offsetLeft + cnvs.offsetWidth >= xPos + cVisual.offsetWidth)
-                  cVisual.style.left = xPos.toString();
-              if (cnvs.offsetTop <= yPos && cnvs.offsetTop + cnvs.offsetHeight >= yPos + cVisual.offsetHeight)
-                  cVisual.style.top = yPos.toString();
-          }
-          cropUp(e){
-               document.onmousemove = null;              
-              document.onmouseup = null;
-          }
+           
           
 }
