@@ -105,6 +105,11 @@ class MainComponent implements AfterViewInit{
          };         
         let firstOpt = <HTMLAnchorElement>document.querySelector("#open a");
         firstOpt.click();
+                
+         document.getElementById("do-topright").onclick = () => {
+              document.getElementById("git_link").click();
+         }
+        
     }
 }
 
