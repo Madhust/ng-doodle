@@ -15,6 +15,8 @@ margin: 0;
 }
 .do-topleft{
   font-size:50px;
+  padding-left: 46px;
+  font-family: cursive;
 }
 .do-topright{
   padding-top: 15px;
@@ -35,6 +37,9 @@ margin: 0;
 .editor-container{
   margin: 50px 50px 50px 60px;
   height:100%;
+}
+#doodler_host{
+  box-shadow: 2px 2px 34px black;
 }
 /****************************** Accordion ***************************/
 article.accordion section
