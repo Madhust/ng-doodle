@@ -99,6 +99,10 @@ class MainComponent implements AfterViewInit{
             window["stream"]["getTracks"]()[0]["stop"]();
             document.getElementById("videocontainer").style.display = "none";
         };
+         document.getElementById("cancel").onclick = () => {
+             window["stream"]["getTracks"]()[0]["stop"]();
+            document.getElementById("videocontainer").style.display = "none";  
+         };
     }
 }
 
