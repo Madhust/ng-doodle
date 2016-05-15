@@ -30,7 +30,7 @@
                                         <label for="do-fileinput">
                                             <span class="fa fa-upload fa-2x"></span>
                                         </label>
-                                        <input id="do-fileinput" type="file"/>
+                                        <input id="do-fileinput" type="file" />
                                     </div>                                    
                                 </td>
                             </tr>
@@ -41,14 +41,14 @@
                                         <label for="do-fileselfie">
                                             <span class="fa fa-camera fa-2x"></span>
                                         </label>
-                                        <input id="do-fileselfie" type="file"/>
+                                        <input id="do-fileselfie" type="button"/>
                                     </div>                                    
                                 </td>
                             </tr>
                             <tr>
                                 <td>URL</td>
                                 <td>                                                                                                               
-                                    <input id="do-fileurl" class="do-fileurl" type="text"/>                                                                        
+                                    <input id="do-fileurl" class="do-fileurl" type="text" [(ngModel)]="imageSrc"/>                                                                        
                                 </td>
                             </tr>  
                             </tbody>                                                     
@@ -182,7 +182,25 @@
             </div>
         </div>
     </div>
-    <div id={{doBottom}} class={{doBottom}}>             
+    <div id={{doBottom}} class={{doBottom}}>
+                     
+    </div>
+    <div id="videocontainer" class="vc-container" style="display:none">
+    <div class="row">
+        <div class="col-md-1">
+        <video autoplay="true" id="videoElement" style="height: 80%"></video>
+     </div>
+     </div>
+        <div class="row">
+             <div class="col-md-2">      
+             <input type="button" id="take" class="btn btn-lg" value="Take Snap"/>
+              </div>      
+              <div class="col-md-2">  </div>              
+        <div class="col-md-2 ">       
+        <input type="button" class="btn btn-lg" value="Cancel"/>        
+    </div>
+    
+    </div>
     </div>
 </div>
     

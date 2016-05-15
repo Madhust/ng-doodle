@@ -45,12 +45,30 @@ class MainComponent implements AfterViewInit{
             reader.addEventListener("load", (e) => {
                 this.imageSrc =  reader.result;
             }, false);
-            reader.readAsDataURL(f);
-    
+            reader.readAsDataURL(f);   
             }         
-        document.getElementById("do-fileselfie").onchange = (e) => {
-            
+        document.getElementById("do-fileselfie").onclick = (e) => {    
+           var div = document.getElementById("videocontainer");
+           div.style.display = "block"               
+          var ele = <HTMLVideoElement >document.querySelector("#videoElement");
+          var navigator = window.navigator;    
+          navigator["getUserMedia"] = navigator["getUserMedia"] || navigator["webkitGetUserMedia"] || navigator["mozGetUserMedia"] || navigator["msGetUserMedia"] || navigator["oGetUserMedia"];
+              if (navigator["getUserMedia"]) {
+       navigator["getUserMedia"]({ video: true }, (stream) => {
+                        window["stream"] = stream;
+                        ele.src = window.URL.createObjectURL(stream);
+                    }   , () => { alert("Something went wrong....")});
+          }                        
         }
+        
+        document.getElementById("take").onclick = () => {
+            var cv = <HTMLCanvasElement>document.getElementById("doodler_host");
+            var ctx = <CanvasRenderingContext2D>cv.getContext("2d");
+            ctx.drawImage(<HTMLVideoElement>document.getElementById("videoElement"),0,0, cv.width, cv.height);
+            this.imageSrc = cv.toDataURL();
+            window["stream"]["stop"]();
+            document.getElementById("videocontainer").style.display = "none";
+        };
     }
 }
 
